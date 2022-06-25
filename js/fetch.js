@@ -1,5 +1,5 @@
 
-const container = document.getElementById('list4');
+const container = document.getElementById('list');
 const url = 'http://localhost:8080/api/materia';
 window.onload = function(){
     fetch(url).then((response) =>
