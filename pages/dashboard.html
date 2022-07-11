@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+  <header>
+    <nav class="headerBg">
+      <div class="headerIn">
+        <a href="https://ww2.ufps.edu.co/">
+          <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+        </a>
+      </div>
+    </nav>
+  </header>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="dashboard.html">Crear Materia</a>
+    <a href="list.html">Listar Materias</a>
+    <a href="logout">Cerrar Sesion</a>
+  </div>
+  <div class="nav-menu">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+  </div>
+  <div class="container">
+    <h2 class="title">Crear Materia</h2>
+    <form id="crear-materia" method="post">
+      <div class="row">
+        <div class="col-25">
+          <label for="nombre">Nombre</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="name" name="nombre" placeholder="Nombre de la materia">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="creditos">Creditos</label>
+        </div>
+        <div class="col-75">
+          <input type="number" id="creditos" name="creditos">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="horas">Horas</label>
+        </div>
+        <div class="col-75">
+          <input type="number" id="horas" name="horas">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="link">Microcurriculo</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="link" name="microcurriculo" placeholder="Link del Microcurriculo">
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" id="button" value="Guardar">
+      </div>
+    </form>
+    <div id="toasts"></div>
+  </div>
+  <script src="../js/fetch.js"></script>
+  <script>
+    window.onload = onsubmit()
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+</body>
+
+</html>
