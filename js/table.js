@@ -52,7 +52,7 @@ $(document).ready(function () {
         fila = $(this);
         id_materia = $(this).closest("tr").find("td:eq(0)").text();
         window.location.replace(
-            `${location.origin}/administrador/actualizar-producto?id_producto=${id_materia}`
+            `dashboard.html?id=${id_materia}`
         );
     });
 });

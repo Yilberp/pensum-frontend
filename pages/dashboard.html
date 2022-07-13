@@ -36,6 +36,7 @@
         </div>
         <div class="col-75">
           <input type="text" id="name" name="nombre" placeholder="Nombre de la materia">
+          <input type="hidden" id="idMateria" name="id">
         </div>
       </div>
       <div class="row">
@@ -59,7 +60,8 @@
           <label for="link">Microcurriculo</label>
         </div>
         <div class="col-75">
-          <input type="text" id="link" name="microcurriculo" placeholder="Link del Microcurriculo">
+          <input type="file" id="link" accept=".pdf">
+          <input type="hidden" id="enlace" name="microcurriculo">
         </div>
       </div>
       <div class="row">
@@ -70,7 +72,47 @@
   </div>
   <script src="../js/fetch.js"></script>
   <script>
-    window.onload = onsubmit()
+    window.onload = async () => {
+      onsubmit();
+      const params = window.location.search;
+      if (params != '') {
+        const urlParams = new URLSearchParams(params);
+        const h2 = document.querySelector(".title");
+        h2.textContent = "Actualizar Materia";
+        const idParam = urlParams.get('id');
+        const idIpt = document.getElementById("idMateria").value = idParam;
+        const nombreIpt = document.getElementById("name");
+        const creditIpt = document.getElementById("creditos");
+        const horasIpt = document.getElementById("horas");
+        try {
+          let res = await fetch(`http://localhost:8080/api/materia/${idParam}`),
+            json = await res.json();
+          if (!res.ok) throw { status: res.status, statusText: res.statusText };
+          nombreIpt.value = json.nombre;
+          creditIpt.value = json.creditos;
+          horasIpt.value = json.horas;
+        } catch (error) {
+          let message = error.statusText || "Error inesperado";
+          console.log(`${error.status}: ${message}`);
+        }
+      }
+
+    };
+    const toBase64 = file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+    var input = document.getElementById("link");
+    input.addEventListener('change', async e => {
+      input = e.target;
+      console.log(input.files[0])
+      const uploadedFileEnlace = input.files[0];
+      const enlaceToBase64 = await toBase64(uploadedFileEnlace);
+      document.getElementById("enlace").value = enlaceToBase64;
+      console.log(enlaceToBase64);
+    });
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
     }

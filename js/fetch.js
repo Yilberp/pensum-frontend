@@ -121,11 +121,10 @@ const getAll = async () => {
 }
 
 const onsubmit = () => {
-    const $form = document.getElementById("crear-materia")
+    const $form = document.getElementById("crear-materia");
     $form.addEventListener('submit', async e => {
         e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target))
-        console.log(data)
+        const data = Object.fromEntries(new FormData(e.target));
         try {
             let options = {
                 method: "POST",
@@ -134,7 +133,7 @@ const onsubmit = () => {
                 },
                 body: JSON.stringify(data)
             }
-
+            
             let res = await fetch(url, options),
                 json = await res.json();
             console.log(json)
