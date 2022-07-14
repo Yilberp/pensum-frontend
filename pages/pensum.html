@@ -30,39 +30,23 @@
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
   </div>
   <div class="container">
-    <h2 class="title">Crear Materia</h2>
-    <form id="crear-materia" method="post">
+    <h2 class="title">Crear Pensum</h2>
+    <form id="crear-pensum" method="post">
       <div class="row">
         <div class="col-25">
-          <label for="nombre">Nombre</label>
+          <label for="nombre">Codigo</label>
         </div>
         <div class="col-75">
-          <input type="text" id="name" name="nombre" placeholder="Nombre de la materia">
-          <input type="hidden" id="idMateria" name="id">
+          <input type="text" id="name" name="codigo" placeholder="Codigo">
+          <input type="hidden" id="idPensum" name="id">
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="creditos">Creditos</label>
+          <label for="link">URL Pensum</label>
         </div>
         <div class="col-75">
-          <input type="number" id="creditos" name="creditos">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="horas">Horas</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="horas" name="horas">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="link">Microcurriculo</label>
-        </div>
-        <div class="col-75">
-          <input type="url" id="link" name="microcurriculo">
+          <input type="url" id="link" name="url">
         </div>
       </div>
       <div class="row">
@@ -74,24 +58,22 @@
   <script src="../js/fetch.js"></script>
   <script>
     window.onload = async () => {
-      onsubmit();
+      onsubmitPensum();
       const params = window.location.search;
       if (params != '') {
         const urlParams = new URLSearchParams(params);
         const h2 = document.querySelector(".title");
-        h2.textContent = "Actualizar Materia";
+        h2.textContent = "Actualizar Pensum";
         const idParam = urlParams.get('id');
-        const idIpt = document.getElementById("idMateria").value = idParam;
-        const nombreIpt = document.getElementById("name");
-        const creditIpt = document.getElementById("creditos");
-        const horasIpt = document.getElementById("horas");
+        const idIpt = document.getElementById("idPensum").value = idParam;
+        const codigoIpt = document.getElementById("codigo");
+        const urlIpt = document.getElementById("url");
         try {
-          let res = await fetch(`http://localhost:8080/api/materia/${idParam}`),
+          let res = await fetch(`http://localhost:8080/api/pensum/${idParam}`),
             json = await res.json();
           if (!res.ok) throw { status: res.status, statusText: res.statusText };
-          nombreIpt.value = json.nombre;
-          creditIpt.value = json.creditos;
-          horasIpt.value = json.horas;
+          codigoIpt.value = json.codigo;
+          urlIpt.value = json.url;
         } catch (error) {
           let message = error.statusText || "Error inesperado";
           console.log(`${error.status}: ${message}`);

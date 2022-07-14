@@ -150,3 +150,30 @@ const onsubmit = () => {
     });
 }
 
+const onsubmitPensum = () => {
+    const $form = document.getElementById("crear-pensum");
+    $form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        try {
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json;charset=utf-8"
+                },
+                body: JSON.stringify(data)
+            }
+            
+            let res = await fetch("http://localhost:8080/api/pensum", options),
+                json = await res.json();
+            console.log(json)
+            if (!res.ok) throw { status: res.status, statusText: res.statusText };
+            else createToast("Guardado Exitosamente", "success");
+
+        } catch (error) {
+            let message = error.statusText || "Error inesperado";
+            createToast(`${error.status}: ${message}`, "error");
+        }
+    });
+}
+
