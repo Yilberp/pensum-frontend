@@ -2,67 +2,66 @@
 <html lang="es">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-  <link rel="stylesheet" href="../css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-  <header>
-    <nav class="headerBg">
-      <div class="headerIn">
-        <a href="https://ww2.ufps.edu.co/">
-          <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
-        </a>
-      </div>
-    </nav>
-  </header>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="dashboard.html">Crear Materia</a>
-    <a href="pensum.html">Crear Pensum</a>
-    <a href="pensum-materia.html">Crear Pensum-Materia</a>
-    <a href="list.html">Listar Materias</a>
-    <a href="logout">Cerrar Sesion</a>
-  </div>
-  <div class="nav-menu">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-  </div>
-  <div class="container">
-    <h2 class="title">Materia Pensum</h2>
-    <form id="crear-materia-pensum" method="post">
-      <div class="row">
-        <div class="col-25">
-          <label for="nomMateria">Nombre</label>
-        </div>
-        <div class="col-75">
-          <datalist id="materias">
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Crear Materia</a>
+        <a href="pensum.html">Crear Pensum</a>
+        <a href="pensum-materia.html">Crear Pensum-Materia</a>
+        <a href="list.html">Listar Materias</a>
+        <a href="logout">Cerrar Sesion</a>
+    </div>
+    <div class="nav-menu">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    </div>
+    <div class="container">
+        <h2 class="title">Materia Pensum</h2>
+        <form id="crear-materia-pensum" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="nomMateria">Nombre</label>
+                </div>
+                <div class="col-75">
+                    <datalist id="materias">
 
           </datalist>
-          <input type="text" list="materias" id="nomMateria" name="idMateria" placeholder="Nombre de la materia">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="codPensum">Codigo Pensum</label>
-        </div>
-        <div class="col-75">
-          <datalist id="pensums">
+                    <input type="text" list="materias" id="nomMateria" name="idMateria" placeholder="Nombre de la materia">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="codPensum">Codigo Pensum</label>
+                </div>
+                <div class="col-75">
+                    <datalist id="pensums">
 
           </datalist>
-          <input type="text" list="pensums" id="codPensum" name="codPensum" placeholder="Codigo del pensum">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="semestre">Semestre</label>
-        </div>
-        <div class="col-75">
-          <select id="semestre" name="semestre">
+                    <input type="text" list="pensums" id="codPensum" name="codPensum" placeholder="Codigo del pensum" onchange="onchangePrerrequisitos()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="semestre">Semestre</label>
+                </div>
+                <div class="col-75">
+                    <select id="semestre" name="semestre" onchange="onchangePrerrequisitos()">
             <option value=""></option>
             <option value="1">Primer</option>
             <option value="2">Segundo</option>
@@ -75,147 +74,168 @@
             <option value="9">Noveno</option>
             <option value="10">Decimo</option>
           </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="codMateria">Codigo Materia</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="codMateria" name="codigo" placeholder="Codigo de la materia">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="codPerrequisito">Codigo Prerequisito</label>
-        </div>
-        <div class="col-75">
-          <select data-placeholder="Selecciona los prerequisitos" id="select-prerequisitos" multiple
-            class="chosen-select" name="test">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="codMateria">Codigo Materia</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="codMateria" name="codigo" placeholder="Codigo de la materia">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="codPerrequisito">Codigo Prerequisito</label>
+                </div>
+                <div class="col-75">
+                    <select data-placeholder="Selecciona los prerequisitos" id="select-prerequisitos" multiple class="chosen-select" name="test">
           </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="crePerrequisito">Creditos Prerequisito</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="crePerrequisito" name="crePerrequisito">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="electiva">Electiva</label>
-        </div>
-        <div class="col-75">
-          <input type="radio" id="electiva" name="electiva" value=1>
-          <label for="electiva">Si</label>
-          <input type="radio" id="electiva" name="electiva" value=0>
-          <label for="electiva">No</label>
-        </div>
-      </div>
-      <div class="row">
-        <input type="submit" id="button" value="Guardar">
-        <input type="hidden" id="estadoPensum" >
-        <input type="hidden" id="estadoSemestre" >
-      </div>
-    </form>
-    <div id="toasts"></div>
-  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="crePerrequisito">Creditos Prerequisito</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="crePerrequisito" name="crePerrequisito">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="electiva">Electiva</label>
+                </div>
+                <div class="col-75">
+                    <input type="radio" id="electiva" name="electiva" value=1>
+                    <label for="electiva">Si</label>
+                    <input type="radio" id="electiva" name="electiva" value=0>
+                    <label for="electiva">No</label>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" id="button" value="Guardar">
+                <input type="hidden" id="estadoPensum">
+                <input type="hidden" id="estadoSemestre">
+            </div>
+        </form>
+        <div id="toasts"></div>
+    </div>
 
-  <script>
-    window.onload = async () => {
-      getMaterias();
-      getPensum();
-      getPrerequisitos();
-      onsubmit();
-    };
-    async function getMaterias() {
-      const datalist = document.getElementById("materias");
-      try {
-        let res = await fetch(`http://localhost:8080/api/materia`),
-          json = await res.json();
-        if (!res.ok) throw { status: res.status, statusText: res.statusText };
-        json.map((materia) => {
-          const opt = document.createElement('option');
-          opt.value = `${materia.id}. ${materia.nombre}`;
-          datalist.appendChild(opt);
-        })
-      } catch (error) {
-        let message = error.statusText || "Error inesperado";
-        console.log(`${error.status}: ${message}`);
-      }
-    }
-    async function getPrerequisitos() {
-      const select = document.getElementById("select-prerequisitos");
-      try {
-        let res = await fetch(`http://localhost:8080/api/malla/prerrequisitos/115/4`),
-          json = await res.json();
-        if (!res.ok) throw { status: res.status, statusText: res.statusText };
-        json.map((materia) => {
-          const opt = document.createElement('option');
-          opt.textContent = `${materia.id}. ${materia.nombre}`;
-          select.appendChild(opt);
-        })
-        $(".chosen-select").chosen({
-          no_results_text: "Oops, nothing found!"
-        })
-      } catch (error) {
-        let message = error.statusText || "Error inesperado";
-        console.log(`${error.status}: ${message}`);
-      }
-    }
-    async function getPensum() {
-      const datalist = document.getElementById("pensums");
-      try {
-        let res = await fetch(`http://localhost:8080/api/pensum`),
-          json = await res.json();
-        if (!res.ok) throw { status: res.status, statusText: res.statusText };
-        json.map((data) => {
-          const opt = document.createElement('option');
-          opt.value = data.codigo;
-          datalist.appendChild(opt);
-        })
-      } catch (error) {
-        let message = error.statusText || "Error inesperado";
-        console.log(`${error.status}: ${message}`);
-      }
-    }
-    async function onsubmit() {
-      const $form = document.getElementById("crear-materia-pensum");
-      $form.addEventListener('submit', async e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target));
-        data.idMateria = data.idMateria.split('.')[0];
-        try {
-          let options = {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-          }
-
-          let res = await fetch("http://localhost:8080/api/pensum", options),
-            json = await res.json();
-          console.log(json)
-          if (!res.ok) throw { status: res.status, statusText: res.statusText };
-          else createToast("Guardado Exitosamente", "success");
-
-        } catch (error) {
-          let message = error.statusText || "Error inesperado";
-          createToast(`${error.status}: ${message}`, "error");
+    <script>
+        window.onload = async() => {
+            getMaterias();
+            getPensum();
+            onsubmit();
+        };
+        async function getMaterias() {
+            const datalist = document.getElementById("materias");
+            try {
+                let res = await fetch(`http://localhost:8080/api/materia`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                json.map((materia) => {
+                    const opt = document.createElement('option');
+                    opt.value = `${materia.id}. ${materia.nombre}`;
+                    datalist.appendChild(opt);
+                })
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
         }
-      });
-    }
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
+        function onchangePrerrequisitos() {
+            const codPensum = document.getElementById('codPensum').value;
+            const semestre = document.getElementById('semestre').value;
+            if (codPensum === '' || semestre === '') return
+            getPrerequisitos(codPensum, semestre);
+        }
+
+        async function getPrerequisitos(codPensum, semestre) {
+            const select = document.getElementById("select-prerequisitos");
+            try {
+                let res = await fetch(`http://localhost:8080/api/malla/prerrequisitos/${codPensum}/${semestre}`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                document.getElementById('select-prerequisitos');
+                let str = "";
+                json.map((materia) => {
+                    str += `<option>${materia.codigo}. ${materia.nombre}</option>`
+                });
+                container.innerHTML = str;
+                $(".chosen-select").chosen({
+                    no_results_text: "Oops, nothing found!"
+                })
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
+        }
+        async function getPensum() {
+            const datalist = document.getElementById("pensums");
+            try {
+                let res = await fetch(`http://localhost:8080/api/pensum`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                json.map((data) => {
+                    const opt = document.createElement('option');
+                    opt.value = data.codigo;
+                    datalist.appendChild(opt);
+                })
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
+        }
+        async function onsubmit() {
+            const $form = document.getElementById("crear-materia-pensum");
+            $form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const data = Object.fromEntries(new FormData(e.target));
+                data.idMateria = data.idMateria.split('.')[0];
+                console.log(data)
+                    // try {
+                    //     let options = {
+                    //         method: "POST",
+                    //         headers: {
+                    //             "Content-type": "application/json;charset=utf-8"
+                    //         },
+                    //         body: JSON.stringify(data)
+                    //     }
+
+                //     let res = await fetch("http://localhost:8080/api/pensum", options),
+                //         json = await res.json();
+                //     console.log(json)
+                //     if (!res.ok) throw {
+                //         status: res.status,
+                //         statusText: res.statusText
+                //     };
+                //     else createToast("Guardado Exitosamente", "success");
+
+                // } catch (error) {
+                //     let message = error.statusText || "Error inesperado";
+                //     createToast(`${error.status}: ${message}`, "error");
+                // }
+            });
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 
 </body>
 

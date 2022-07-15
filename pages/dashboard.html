@@ -2,110 +2,113 @@
 <html lang="es">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-  <header>
-    <nav class="headerBg">
-      <div class="headerIn">
-        <a href="https://ww2.ufps.edu.co/">
-          <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
-        </a>
-      </div>
-    </nav>
-  </header>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="dashboard.html">Crear Materia</a>
-    <a href="pensum.html">Crear Pensum</a>
-    <a href="pensum-materia.html">Crear Pensum-Materia</a>
-    <a href="list.html">Listar Materias</a>
-    <a href="logout">Cerrar Sesion</a>
-  </div>
-  <div class="nav-menu">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-  </div>
-  <div class="container">
-    <h2 class="title">Crear Materia</h2>
-    <form id="crear-materia" method="post">
-      <div class="row">
-        <div class="col-25">
-          <label for="nombre">Nombre</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="name" name="nombre" placeholder="Nombre de la materia">
-          <input type="hidden" id="idMateria" name="id">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="creditos">Creditos</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="creditos" name="creditos">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="horas">Horas</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="horas" name="horas">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="link">Microcurriculo</label>
-        </div>
-        <div class="col-75">
-          <input type="url" id="link" name="microcurriculo">
-        </div>
-      </div>
-      <div class="row">
-        <input type="submit" id="button" value="Guardar">
-      </div>
-    </form>
-    <div id="toasts"></div>
-  </div>
-  <script src="../js/fetch.js"></script>
-  <script>
-    window.onload = async () => {
-      onsubmit();
-      const params = window.location.search;
-      if (params != '') {
-        const urlParams = new URLSearchParams(params);
-        const h2 = document.querySelector(".title");
-        h2.textContent = "Actualizar Materia";
-        const idParam = urlParams.get('id');
-        const idIpt = document.getElementById("idMateria").value = idParam;
-        const nombreIpt = document.getElementById("name");
-        const creditIpt = document.getElementById("creditos");
-        const horasIpt = document.getElementById("horas");
-        try {
-          let res = await fetch(`http://localhost:8080/api/materia/${idParam}`),
-            json = await res.json();
-          if (!res.ok) throw { status: res.status, statusText: res.statusText };
-          nombreIpt.value = json.nombre;
-          creditIpt.value = json.creditos;
-          horasIpt.value = json.horas;
-        } catch (error) {
-          let message = error.statusText || "Error inesperado";
-          console.log(`${error.status}: ${message}`);
-        }
-      }
-    };
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Crear Materia</a>
+        <a href="pensum.html">Crear Pensum</a>
+        <a href="pensum-materia.html">Crear Pensum-Materia</a>
+        <a href="list.html">Listar Materias</a>
+        <a href="logout">Cerrar Sesion</a>
+    </div>
+    <div class="nav-menu">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    </div>
+    <div class="container">
+        <h2 class="title">Crear Materia</h2>
+        <form id="crear-materia" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="name" name="nombre" placeholder="Nombre de la materia">
+                    <input type="hidden" id="idMateria" name="id">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="creditos">Creditos</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="creditos" name="creditos">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="horas">Horas</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="horas" name="horas">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="link">Microcurriculo</label>
+                </div>
+                <div class="col-75">
+                    <input type="url" id="link" name="microcurriculo">
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" id="button" value="Guardar">
+            </div>
+        </form>
+        <div id="toasts"></div>
+    </div>
+    <script src="../js/fetch.js"></script>
+    <script>
+        window.onload = async() => {
+            onsubmit();
+            const params = window.location.search;
+            if (params != '') {
+                const urlParams = new URLSearchParams(params);
+                const h2 = document.querySelector(".title");
+                h2.textContent = "Actualizar Materia";
+                const idParam = urlParams.get('id');
+                const idIpt = document.getElementById("idMateria").value = idParam;
+                const nombreIpt = document.getElementById("name");
+                const creditIpt = document.getElementById("creditos");
+                const horasIpt = document.getElementById("horas");
+                try {
+                    let res = await fetch(`http://localhost:8080/api/materia/${idParam}`),
+                        json = await res.json();
+                    if (!res.ok) throw {
+                        status: res.status,
+                        statusText: res.statusText
+                    };
+                    nombreIpt.value = json.nombre;
+                    creditIpt.value = json.creditos;
+                    horasIpt.value = json.horas;
+                } catch (error) {
+                    let message = error.statusText || "Error inesperado";
+                    console.log(`${error.status}: ${message}`);
+                }
+            }
+        };
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 
 </body>
 
