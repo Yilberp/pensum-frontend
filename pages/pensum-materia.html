@@ -89,7 +89,7 @@
                     <label for="codPerrequisito">Codigo Prerequisito</label>
                 </div>
                 <div class="col-75">
-                    <select data-placeholder="Selecciona los prerequisitos" id="select-prerequisitos" multiple class="chosen-select" name="test">
+                    <select data-placeholder="Selecciona los prerequisitos" id="select-prerequisitos" multiple class="chosen-select" name="codPerrequisito">
           </select>
                 </div>
             </div>
@@ -203,29 +203,43 @@
                 e.preventDefault();
                 const data = Object.fromEntries(new FormData(e.target));
                 data.idMateria = data.idMateria.split('.')[0];
-                console.log(data)
-                    // try {
-                    //     let options = {
-                    //         method: "POST",
-                    //         headers: {
-                    //             "Content-type": "application/json;charset=utf-8"
-                    //         },
-                    //         body: JSON.stringify(data)
-                    //     }
+                const elementos = document.getElementsByClassName('chosen-choices')[0];
+                if (elementos !== undefined) {
+                    let strRequisito = '';
+                    for (var i = 0; i < elementos.childNodes.length; i++) {
+                        if (elementos.childNodes[i].childNodes[0] !== undefined)
+                            if (elementos.childNodes[i].childNodes[0].textContent !== '\n    ')
+                                strRequisito += elementos.childNodes[i].childNodes[0].textContent.split('.')[0] + "-";
 
-                //     let res = await fetch("http://localhost:8080/api/pensum", options),
-                //         json = await res.json();
-                //     console.log(json)
-                //     if (!res.ok) throw {
-                //         status: res.status,
-                //         statusText: res.statusText
-                //     };
-                //     else createToast("Guardado Exitosamente", "success");
+                    }
+                    data.codPerrequisito = strRequisito.substring(0, strRequisito.length - 1);
+                } else {
+                    data.codPerrequisito = "";
+                }
+                data.electiva = data.electiva === "1"
+                console.log(data);
+                try {
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json;charset=utf-8"
+                        },
+                        body: JSON.stringify(data)
+                    }
 
-                // } catch (error) {
-                //     let message = error.statusText || "Error inesperado";
-                //     createToast(`${error.status}: ${message}`, "error");
-                // }
+                    let res = await fetch("http://localhost:8080/api/malla/materia", options),
+                        json = await res.json();
+                    console.log(json)
+                    if (!res.ok) throw {
+                        status: res.status,
+                        statusText: res.statusText
+                    };
+                    // else createToast("Guardado Exitosamente", "success");
+
+                } catch (error) {
+                    let message = error.statusText || "Error inesperado";
+                    // createToast(`${error.status}: ${message}`, "error");
+                }
             });
         }
 
