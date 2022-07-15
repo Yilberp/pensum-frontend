@@ -163,15 +163,16 @@
                     status: res.status,
                     statusText: res.statusText
                 };
-                document.getElementById('select-prerequisitos');
+                const select = document.getElementById('select-prerequisitos');
                 let str = "";
                 json.map((materia) => {
                     str += `<option>${materia.codigo}. ${materia.nombre}</option>`
                 });
-                container.innerHTML = str;
+                select.innerHTML = str;
                 $(".chosen-select").chosen({
                     no_results_text: "Oops, nothing found!"
                 })
+                $("#select-prerequisitos").trigger("chosen:updated");
             } catch (error) {
                 let message = error.statusText || "Error inesperado";
                 console.log(`${error.status}: ${message}`);
