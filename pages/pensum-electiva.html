@@ -2,64 +2,63 @@
 <html lang="es">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-  <link rel="stylesheet" href="../css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-  <header>
-    <nav class="headerBg">
-      <div class="headerIn">
-        <a href="https://ww2.ufps.edu.co/">
-          <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
-        </a>
-      </div>
-    </nav>
-  </header>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="dashboard.html">Crear Materia</a>
-    <a href="pensum.html">Crear Pensum</a>
-    <a href="pensum-materia.html">Crear Pensum-Materia</a>
-    <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
-    <a href="list.html">Listar Materias</a>
-    <a href="logout">Cerrar Sesion</a>
-  </div>
-  <div class="nav-menu">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-  </div>
-  <div class="container">
-    <h2 class="title">Electiva Pensum</h2>
-    <form id="crear-electiva-pensum" method="post">
-      <div class="row">
-        <div class="col-25">
-          <label for="nomMateria">Nombre</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="nombre" name="nombre" placeholder="Nombre">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="codPensum">Codigo Pensum</label>
-        </div>
-        <div class="col-75">
-          <select id="pensums" name="codPensum">
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Crear Materia</a>
+        <a href="pensum.html">Crear Pensum</a>
+        <a href="pensum-materia.html">Crear Pensum-Materia</a>
+        <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
+        <a href="list.html">Listar Materias</a>
+        <a href="logout">Cerrar Sesion</a>
+    </div>
+    <div class="nav-menu">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    </div>
+    <div class="container">
+        <h2 class="title">Electiva Pensum</h2>
+        <form id="crear-electiva-pensum" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="nomMateria">Nombre</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="codPensum">Codigo Pensum</label>
+                </div>
+                <div class="col-75">
+                    <select id="pensums" name="codPensum">
 
           </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="semestre">Semestre</label>
-        </div>
-        <div class="col-75">
-          <select id="semestre" name="semestre">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="semestre">Semestre</label>
+                </div>
+                <div class="col-75">
+                    <select id="semestre" name="semestre">
             <option value=""></option>
             <option value="1">Primer</option>
             <option value="2">Segundo</option>
@@ -72,88 +71,94 @@
             <option value="9">Noveno</option>
             <option value="10">Decimo</option>
           </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="codMateria">Horas</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="horas" name="horas">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="crePerrequisito">Creditos</label>
-        </div>
-        <div class="col-75">
-          <input type="number" id="creditos" name="creditos">
-        </div>
-      </div>
-      <div class="row">
-        <input type="submit" id="button" value="Guardar">
-      </div>
-    </form>
-    <div id="toasts"></div>
-  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="codMateria">Horas</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="horas" name="horas">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="crePerrequisito">Creditos</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="creditos" name="creditos">
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" id="button" value="Guardar">
+            </div>
+        </form>
+        <div id="toasts"></div>
+    </div>
 
-  <script>
-    window.onload = async () => {
-      getPensum();
-      onsubmit();
-    };
-    async function getPensum() {
-      const datalist = document.getElementById("pensums");
-      try {
-        let res = await fetch(`http://localhost:8080/api/pensum`),
-          json = await res.json();
-        if (!res.ok) throw { status: res.status, statusText: res.statusText };
-        json.map((data) => {
-          const opt = document.createElement('option');
-          opt.value = data.codigo;
-          opt.textContent = data.codigo;
-          datalist.appendChild(opt);
-        })
-      } catch (error) {
-        let message = error.statusText || "Error inesperado";
-        console.log(`${error.status}: ${message}`);
-      }
-    }
-    async function onsubmit() {
-      const $form = document.getElementById("crear-electiva-pensum");
-      $form.addEventListener('submit', async e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target));
-        data.idMateria = data.idMateria.split('.')[0];
-        try {
-          let options = {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-          }
-
-          let res = await fetch("http://localhost:8080/api/pensum", options),
-            json = await res.json();
-          console.log(json)
-          if (!res.ok) throw { status: res.status, statusText: res.statusText };
-          else console.log("Guardado Exitosamente");
-
-        } catch (error) {
-          let message = error.statusText || "Error inesperado";
-          console.log(`${error.status}: ${message}`);
+    <script>
+        window.onload = async() => {
+            getPensum();
+            onsubmit();
+        };
+        async function getPensum() {
+            const datalist = document.getElementById("pensums");
+            try {
+                let res = await fetch(`http://localhost:8080/api/pensum`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                json.map((data) => {
+                    const opt = document.createElement('option');
+                    opt.value = data.codigo;
+                    opt.textContent = data.codigo;
+                    datalist.appendChild(opt);
+                })
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
         }
-      });
-    }
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
+        async function onsubmit() {
+            const $form = document.getElementById("crear-electiva-pensum");
+            $form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const data = Object.fromEntries(new FormData(e.target));
+                try {
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json;charset=utf-8"
+                        },
+                        body: JSON.stringify(data)
+                    }
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
+                    let res = await fetch("http://localhost:8080/api/malla/electiva", options),
+                        json = await res.json();
+                    console.log(json)
+                    if (!res.ok) throw {
+                        status: res.status,
+                        statusText: res.statusText
+                    };
+                    else console.log("Guardado Exitosamente");
+
+                } catch (error) {
+                    let message = error.statusText || "Error inesperado";
+                    console.log(`${error.status}: ${message}`);
+                }
+            });
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 
 </body>
 
