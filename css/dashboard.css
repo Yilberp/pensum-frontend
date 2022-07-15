@@ -56,6 +56,14 @@ body {
   margin-left: 50px;
 }
 
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+}
+
 /* Style inputs, select elements and textareas */
 input[type=text],
 input[type=email],
@@ -78,7 +86,8 @@ label {
 }
 
 /* Style the submit button */
-input[type=submit] {
+input[type=submit],
+.btn-list {
   background-color: crimson;
   color: white;
   padding: 12px 20px;

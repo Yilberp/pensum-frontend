@@ -26,6 +26,7 @@
     <a href="dashboard.html">Crear Materia</a>
     <a href="pensum.html">Crear Pensum</a>
     <a href="pensum-materia.html">Crear Pensum-Materia</a>
+    <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
     <a href="list.html">Listar Materias</a>
     <a href="logout">Cerrar Sesion</a>
   </div>
@@ -34,19 +35,18 @@
   </div>
 
   <section class="container-table">
+    <div class="options">
+      <a id="cargar-pensum" class="btn-list" href="list.html?id=pensum" >Pensums</a>
+      <a id="cargar-materia" class="btn-list" href="list.html?id=materia" >Materias</a>
+      <a id="cargar-pensum-electiva" class="btn-list" href="list.html?id=malla/electiva" >Pensum-Electivas</a>
+      <a id="cargar-pensum-materia" class="btn-list" href="list.html?id=malla/materia" >Pensum-Materias</a>
+    </div>
     <table id="listAll" class="stripe nowrap" style="width:100%">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Creditos</th>
-          <th>Horas</th>
-          <th>Microcurriculo</th>
-          <th>Acciones</th>
-        </tr>
+      <thead id="thead">
+        
       </thead>
       <tbody>
-  
+
       </tbody>
     </table>
   </section>
