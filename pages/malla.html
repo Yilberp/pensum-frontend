@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
+                        alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Crear Materia</a>
+        <a href="pensum.html">Crear Pensum</a>
+        <a href="pensum-materia.html">Crear Pensum-Materia</a>
+        <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
+        <a href="list.html">Listar Materias</a>
+        <a href="malla.html">Ver Malla</a>
+        <a href="logout">Cerrar Sesion</a>
+    </div>
+    <div class="nav-menu">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    </div>
+
+    <section class="container-table">
+        <div id="buttons" class="options">
+            
+        </div>
+    </section>
+
+    <section class="container-table">
+        <h2>Malla</h2>
+        <div id="container-malla" class="container-semester">
+            
+        </div>
+    </section>
+
+    <div id="toasts"></div>
+    <script>
+        window.onload =  () => {
+            loadButtons();
+            const params = window.location.search;
+            if (params != '') {
+                const urlParams = new URLSearchParams(params);
+                const idParam = urlParams.get('id');
+                var h2 = document.querySelector('h2');
+                h2.textContent = `Malla ${idParam}`;
+                createMalla(idParam);
+            }
+        }
+        async function createMalla(idParam) {
+            var container = document.getElementById("container-malla");
+            const semestreHash = {
+                1: "PRIMER SEMESTRE",
+                2: "SEGUNDO SEMESTRE",
+                3: "TERCER SEMESTRE",
+                4: "CUARTO SEMESTRE",
+                5: "QUINTO SEMESTRE",
+                6: "SEXTO SEMESTRE",
+                7: "SEPTIMO SEMESTRE",
+                8: "OCTAVO SEMESTRE",
+                9: "NOVENO SEMESTRE",
+                10: "DECIMO SEMESTRE",
+            }
+            try {
+                let res = await fetch(`http://localhost:8080/api/malla/${idParam}`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                let str = "";
+                let materias = "";
+                json.semestres.map((pensum) => {
+                    str += `<div id="container-malla" class="container-semester">
+                        <div class="semester">${semestreHash[pensum.numero]}</div>`;
+
+                    pensum.materias[0].map(materia => {
+                        materias += `<div class="card">
+                <div class="header">
+                    
+                    <h1 class="title">${materia.nombre}</h1>
+                </div>
+            
+                <div class="content">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur
+                        adipiscing it amet it...
+                    </p>
+            
+                    <a class="btn-link">Read More...</a>
+                </div>
+            </div>`;
+                    });
+                str += materias;
+                materias = "";
+                str += `</div>`;
+                })
+                container.innerHTML = str;
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
+        }
+        async function loadButtons() {
+            var container = document.getElementById("buttons");
+            try {
+                let res = await fetch(`http://localhost:8080/api/pensum`),
+                    json = await res.json();
+                if (!res.ok) throw {
+                    status: res.status,
+                    statusText: res.statusText
+                };
+                let str = "";
+                json.map(function (pensum) {
+                    str += `<a id='${pensum.codigo}' class='btn-list' href='malla.html?id=${pensum.codigo}'>${pensum.codigo}</a>`;
+                })
+                container.innerHTML = str;
+            } catch (error) {
+                let message = error.statusText || "Error inesperado";
+                console.log(`${error.status}: ${message}`);
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+</body>
+
+</html>

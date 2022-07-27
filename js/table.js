@@ -123,6 +123,7 @@ window.onload = () => {
                 data: { id },
                 success: function () {
                     tablaMaterias.row(fila.parents("tr")).remove().draw();
+                    createToast("Eliminado Exitosamente", "success");
                 },
             });
         }
@@ -130,7 +131,11 @@ window.onload = () => {
     $("#listAll").on("click", ".edit", function (e) {
         e.preventDefault();
         fila = $(this);
-        id_materia = $(this).closest("tr").find("td:eq(0)").text();
+        if ($(this).parents("tr").hasClass('child')) { //vemos si el actual row es child row
+            id_materia = $(this).parents("tr").prev().find('td:eq(0)').text(); //si es asi, nos regresamos al row anterior, es decir, al padre y obtenemos el id
+        } else {
+            id_materia = $(this).closest("tr").find('td:eq(0)').text(); //si no lo es, seguimos capturando el id del actual row
+        }
         window.location.replace(
             `dashboard.html?id=${id_materia}`
         );

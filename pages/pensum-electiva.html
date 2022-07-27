@@ -3,7 +3,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
@@ -15,7 +16,8 @@
         <nav class="headerBg">
             <div class="headerIn">
                 <a href="https://ww2.ufps.edu.co/">
-                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
+                        alt="Logo UFPS">
                 </a>
             </div>
         </nav>
@@ -27,7 +29,7 @@
         <a href="pensum-materia.html">Crear Pensum-Materia</a>
         <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
         <a href="list.html">Listar Materias</a>
-        <a href="index.html">Ver PDF</a>
+        <a href="malla.html">Ver Malla</a>
         <a href="logout">Cerrar Sesion</a>
     </div>
     <div class="nav-menu">
@@ -41,7 +43,7 @@
                     <label for="nomMateria">Nombre</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
                 </div>
             </div>
             <div class="row">
@@ -51,7 +53,7 @@
                 <div class="col-75">
                     <select id="pensums" name="codPensum">
 
-          </select>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -60,18 +62,18 @@
                 </div>
                 <div class="col-75">
                     <select id="semestre" name="semestre">
-            <option value=""></option>
-            <option value="1">Primer</option>
-            <option value="2">Segundo</option>
-            <option value="3">Tercer</option>
-            <option value="4">Cuarto</option>
-            <option value="5">Quinto</option>
-            <option value="6">Sexto</option>
-            <option value="7">Septimo</option>
-            <option value="8">Octavo</option>
-            <option value="9">Noveno</option>
-            <option value="10">Decimo</option>
-          </select>
+                        <option value=""></option>
+                        <option value="1">Primer</option>
+                        <option value="2">Segundo</option>
+                        <option value="3">Tercer</option>
+                        <option value="4">Cuarto</option>
+                        <option value="5">Quinto</option>
+                        <option value="6">Sexto</option>
+                        <option value="7">Septimo</option>
+                        <option value="8">Octavo</option>
+                        <option value="9">Noveno</option>
+                        <option value="10">Decimo</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -79,7 +81,7 @@
                     <label for="codMateria">Horas</label>
                 </div>
                 <div class="col-75">
-                    <input type="number" id="horas" name="horas">
+                    <input type="number" id="horas" name="horas" required>
                 </div>
             </div>
             <div class="row">
@@ -87,7 +89,7 @@
                     <label for="crePerrequisito">Creditos</label>
                 </div>
                 <div class="col-75">
-                    <input type="number" id="creditos" name="creditos">
+                    <input type="number" id="creditos" name="creditos" required>
                 </div>
             </div>
             <div class="row">
@@ -97,8 +99,9 @@
         <div id="toasts"></div>
     </div>
 
+    <script src="../js/toats.js"></script>
     <script>
-        window.onload = async() => {
+        window.onload = async () => {
             getPensum();
             onsubmit();
         };
@@ -143,11 +146,11 @@
                         status: res.status,
                         statusText: res.statusText
                     };
-                    else console.log("Guardado Exitosamente");
+                    else createToast("Guardado Exitosamente", "success");
 
                 } catch (error) {
                     let message = error.statusText || "Error inesperado";
-                    console.log(`${error.status}: ${message}`);
+                    createToast(`${error.status}: ${message}`, "error");
                 }
             });
         }
