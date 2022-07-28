@@ -1,6 +1,7 @@
 var fila, id;
 var columns = [];
 var idParam = "";
+var path = "";
 window.onload = () => {
     // if ($.fn.dataTable.isDataTable('#listAll')) {
     //     $("#listAll").destroy();
@@ -22,6 +23,7 @@ window.onload = () => {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
         ]
+        path = `dashboard.html?id=`;
         thead.innerHTML = `<tr>
             <th>Id</th>
             <th>Nombre</th>
@@ -34,11 +36,16 @@ window.onload = () => {
     if (idParam == "pensum") {
         columns = [
             { data: "codigo" },
-            { data: "url" },
+            { data: "url","fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                if (oData.url != null) {
+                    $(nTd).html("<a href="+oData.url+" target='_blank'>"+oData.url+"</a>");
+                }
+            } },
             {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
         ]
+        path = `pensum.html?id=`;
         thead.innerHTML = `<tr>
             <th>Codigo</th>
             <th>URL</th>
@@ -56,6 +63,7 @@ window.onload = () => {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
         ]
+        path = `pensum-electiva.html?id=`;
         thead.innerHTML = `<tr>
             <th>Codigo Pensum</th>
             <th>nombre</th>
@@ -78,6 +86,7 @@ window.onload = () => {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
         ]
+        path = `pensum-materia.html?id=`;
         thead.innerHTML = `<tr>
             <th>Id Materia</th>
             <th>Codigo Pensum</th>
@@ -102,7 +111,6 @@ window.onload = () => {
             columns: columns,
             responsive: true
         })
-        .columns.adjust()
         .responsive.recalc();
     $("#listAll").on("click", ".delete", function (e) {
         e.preventDefault();
@@ -137,7 +145,7 @@ window.onload = () => {
             id_materia = $(this).closest("tr").find('td:eq(0)').text(); //si no lo es, seguimos capturando el id del actual row
         }
         window.location.replace(
-            `dashboard.html?id=${id_materia}`
+            path + id_materia
         );
     });
 

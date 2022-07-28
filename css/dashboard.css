@@ -133,7 +133,7 @@ input[type=submit],
 }
 
 .container-table {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 20px auto;
 }
 
@@ -178,7 +178,7 @@ input[type=submit],
   gap: 20px;
   width: 100%;
   height: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   overflow-x: auto;
 }
 
@@ -204,18 +204,19 @@ input[type=submit],
 }
 
 .card:hover {
-  height: 254px;
-  background: linear-gradient(360deg, #edededc5 60%, hsla(0, 0%, 13%, 1) 70%);
+  height: 254px;;
 }
 
 .card .header {
   padding: 20px;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #212121;
   margin-bottom: 16px;
+  min-height: 72px;
 }
 
 .card .header .img-box {
@@ -223,8 +224,7 @@ input[type=submit],
 }
 
 .card .header .title {
-  font-size: 1.1em;
-  letter-spacing: .1em;
+  font-size: 1em;
   font-weight: 500;
   text-transform: uppercase;
   padding: 4px 0 14px 0;
@@ -296,5 +296,9 @@ input[type=submit],
   .container-table {
     width: 100%;
     margin: 0;
+  }
+
+  .container-semester{
+    width: 100%;
   }
 }

@@ -41,7 +41,7 @@
 
     <section class="container-table">
         <h2>Malla</h2>
-        <div id="container-malla" class="container-semester">
+        <div id="container-malla" class="container-table">
             
         </div>
     </section>
@@ -74,7 +74,7 @@
                 10: "DECIMO SEMESTRE",
             }
             try {
-                let res = await fetch(`http://localhost:8080/api/malla/${idParam}`),
+                let res = await fetch(`http://192.168.1.13:8080/api/malla/${idParam}`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
@@ -90,16 +90,15 @@
                         materias += `<div class="card">
                 <div class="header">
                     
-                    <h1 class="title">${materia.nombre}</h1>
+                    <h1 class="title">${materia.nombre} - ${materia.codigo}</h1>
                 </div>
             
                 <div class="content">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing it amet it...
+                        Prerrequisito: ${materia.codPerrequisito}
                     </p>
             
-                    <a class="btn-link">Read More...</a>
+                    <a class="btn-link">Microcurriculo</a>
                 </div>
             </div>`;
                     });
@@ -116,7 +115,7 @@
         async function loadButtons() {
             var container = document.getElementById("buttons");
             try {
-                let res = await fetch(`http://localhost:8080/api/pensum`),
+                let res = await fetch(`http://192.168.1.13:8080/api/pensum`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
