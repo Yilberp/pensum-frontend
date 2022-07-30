@@ -36,11 +36,11 @@
     <form id="crear-pensum" method="post">
       <div class="row">
         <div class="col-25">
-          <label for="nombre">Codigo</label>
+          <label for="codigo">Codigo</label>
         </div>
         <div class="col-75">
           <input type="text" id="codigo" name="codigo" placeholder="Codigo">
-          <input type="hidden" id="idPensum" name="id">
+          <input type="hidden" id="idPensum">
         </div>
       </div>
       <div class="row">
@@ -49,6 +49,34 @@
         </div>
         <div class="col-75">
           <input type="url" id="link" name="url">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="pensumB">¿Pensum Terminado?</label>
+          <div class="tooltip">&#9432;
+            <span class="tooltiptext">Sí el pensum está terminado se mostrará al público, de lo contrario, sólo el administrador podrá verlo</span>
+          </div>
+        </div>
+        <div class="col-75">
+          <input type="radio" id="pensumBSi" name="pensumTerminado" value=1>
+          <label for="pensumBSi">Si</label>
+          <input type="radio" id="pensumBNo" name="pensumTerminado" value=0>
+          <label for="pensumBNo">No</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="mallaB">¿Malla Terminada?</label>
+          <div class="tooltip">&#9432;
+            <span class="tooltiptext">Sí la malla está terminada se mostrará al público, de lo contrario, no se mostrará</span>
+          </div>
+        </div>
+        <div class="col-75">
+          <input type="radio" id="mallaBSi" name="mallaTerminada" value=1>
+          <label for="mallaBSi">Si</label>
+          <input type="radio" id="mallaBNo" name="mallaTerminada" value=0>
+          <label for="mallaBNo">No</label>
         </div>
       </div>
       <div class="row">
@@ -77,6 +105,8 @@
           if (!res.ok) throw { status: res.status, statusText: res.statusText };
           codigoIpt.value = json.codigo;
           urlIpt.value = json.url;
+          json.pensumTerminado ? document.getElementById('pensumBSi').checked = true : document.getElementById('pensumBNo').checked = true;
+          json.mallaTerminada ? document.getElementById('mallaBSi').checked = true : document.getElementById('mallaBNo').checked = true;
         } catch (error) {
           let message = error.statusText || "Error inesperado";
           createToast(`${error.status}: ${message}`, "error");

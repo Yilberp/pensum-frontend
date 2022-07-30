@@ -46,6 +46,7 @@
 
           </datalist>
           <input type="text" list="materias" id="nomMateria" name="idMateria" placeholder="Nombre de la materia">
+          <input type="hidden" id="id" name="id">
         </div>
       </div>
       <div class="row">
@@ -113,16 +114,14 @@
           <label for="electiva">Electiva</label>
         </div>
         <div class="col-75">
-          <input type="radio" id="electiva" name="electiva" value=1>
+          <input type="radio" id="electivaSi" name="electiva" value=1>
           <label for="electiva">Si</label>
-          <input type="radio" id="electiva" name="electiva" value=0>
+          <input type="radio" id="electivaNo" name="electiva" value=0>
           <label for="electiva">No</label>
         </div>
       </div>
       <div class="row">
         <input type="submit" id="button" value="Guardar">
-        <input type="hidden" id="estadoPensum">
-        <input type="hidden" id="estadoSemestre">
       </div>
     </form>
     <div id="toasts"></div>
@@ -134,6 +133,46 @@
       getMaterias();
       getPensum();
       onsubmit();
+      const params = window.location.search;
+      if (params != '') {
+        const urlParams = new URLSearchParams(params);
+        const h2 = document.querySelector(".title");
+        h2.textContent = "Actualizar Materia - Pensum";
+        const idParam = urlParams.get('id');
+        const idIpt = document.getElementById("id").value = idParam;
+        const nombreIpt = document.getElementById("nomMateria");
+        const codMitIpt = document.getElementById("codMateria");
+        const codPIpt = document.getElementById("codPensum");
+        const semIpt = document.getElementById("semestre");
+        const preIpt = document.getElementById("select-prerequisitos");
+        const creIpt = document.getElementById("crePerrequisito");
+        try {
+          let res = await fetch(`http://localhost:8080/api/malla/materia/${idParam}`),
+            json = await res.json();
+          if (!res.ok) throw {
+            status: res.status,
+            statusText: res.statusText
+          };
+          nombreIpt.value = json.materiaEntity.id + ". " + json.materiaEntity.nombre;
+          codMitIpt.value = json.codigo;
+          codPIpt.value = json.pensumEntity.codigo;
+          semIpt.value = json.semestre;
+          creIpt.value = json.crePerrequisito;
+          json.electiva ? document.getElementById('electivaSi').checked = true : document.getElementById('electivaNo').checked = true;
+          if (json.codPerrequisito !== undefined && json.codPerrequisito !== null && json.codPerrequisito !== "") {
+            let str = `<option selected>${json.codPerrequisito}</option>`;
+            preIpt.innerHTML = str;
+            $(".chosen-select").chosen({
+              no_results_text: "Oops, nothing found!"
+            })
+            $("#select-prerequisitos").trigger("chosen:updated");
+          }else{ getPrerequisitos(json.pensumEntity.codigo, json.semestre)}
+          
+        } catch (error) {
+          let message = error.statusText || "Error inesperado";
+          console.log(`${error.status}: ${message}`);
+        }
+      }
     };
     async function getMaterias() {
       const datalist = document.getElementById("materias");

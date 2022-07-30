@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div id="malla">
+
+    </div>
+</body>
+<script>
+    window.onload = async() => {
+        getMalla();
+    };
+    async function getMalla() {
+        const datalist = document.getElementById("malla");
+        try {
+            let res = await fetch(`http://localhost:8080/api/malla/115`),
+                json = await res.json();
+            if (!res.ok) throw {
+                status: res.status,
+                statusText: res.statusText
+            };
+            let str = "";
+            let strMaterias = ""
+            let totalHoras = 0;
+            let totalHorasIdependientes = 0;
+            let totalCreditos = 0;
+            const semestreHash = {
+                1: "Primer",
+                2: "Segundo",
+                3: "Tercer",
+                4: "Cuarto",
+                5: "Quinto",
+                6: "Sexto",
+                7: "Septimo",
+                8: "Octavo",
+                9: "Noveno",
+                10: "Decimo",
+            }
+            json.semestres.map((data) => {
+                str += `
+                <div class="container">
+            <div style="position: relative; width: 100px">
+                <div style="background:#DADADA;border-top: 1px solid gray;border-bottom: 1px solid gray;right: 0;position:absolute; top: 0; left: 0;" class="table-data"><b>Semestre<br> <br></b></div>
+                <div style="left: 0;position:absolute; bottom: 30%; right: 50%" class="texto_deg90">${semestreHash[data.numero]}</div>
+            </div>
+            <div class="table">
+                <div>
+                    <div class="table-header">
+                        <div class="header__item"><a id="name" class="filter__link" href="#">Código</a></div>
+                        <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Materia</a></div>
+                        <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">HT</a>
+                        </div>
+                        <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">HP</a>
+                        </div>
+                        <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">H.Trab.
+							Ind</a></div>
+                        <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Creditos</a></div>
+                        <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Pre-requisitos</a></div>
+                        <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Req.Cred</a></div>
+                    </div>
+                    <div class="table-content">
+                `;
+                data.materias[0].map(materia => {
+                    strMaterias += `
+                            <div class="table-row">
+                                <div class="table-data">${materia.codigo === null? "":materia.codigo}</div>
+                                <div class="table-data">${materia.nombre}</div>
+                                <div class="table-data">${materia.horas}</div>
+                                <div class="table-data">0</div>
+                                <div class="table-data">${Number(materia.horas)*2}</div>
+                                <div class="table-data">${materia.creditos}</div>
+                                <div class="table-data">${materia.codPerrequisito === null? "":materia.codPerrequisito}</div>
+                                <div class="table-data">${materia.crePerrequisito === null? "":materia.crePerrequisito}</div>
+                            </div>
+                            `;
+                    totalHoras += Number(materia.horas);
+                    totalHorasIdependientes += Number(materia.horas) * 2;
+                    totalCreditos += Number(materia.creditos);
+
+                });
+                str += strMaterias;
+                strMaterias = "";
+                str += `
+                    </div>
+                    <div class="table-row">
+                        <div class="table-data"><b></b> </div>
+                        <div class="table-data"><b>Total creditos</b></div>
+                        <div class="table-data">${totalHoras}</div>
+                        <div class="table-data">0</div>
+                        <div class="table-data">${totalHorasIdependientes}</div>
+                        <div class="table-data">${totalCreditos}</div>
+                        <div class="table-data"></div>
+                        <div class="table-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                `;
+                totalHoras = 0;
+                totalHorasIdependientes = 0;
+                totalCreditos = 0;
+            })
+            datalist.innerHTML = str;
+        } catch (error) {
+            let message = error.statusText || "Error inesperado";
+            console.log(`${error.status}: ${message}`);
+        }
+    }
+</script>
+
+</html>

@@ -74,7 +74,7 @@
                 10: "DECIMO SEMESTRE",
             }
             try {
-                let res = await fetch(`http://192.168.1.13:8080/api/malla/${idParam}`),
+                let res = await fetch(`http://localhost:8080/api/malla/${idParam}`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
@@ -90,15 +90,18 @@
                         materias += `<div class="card">
                 <div class="header">
                     
-                    <h1 class="title">${materia.nombre} - ${materia.codigo}</h1>
+                    <h1 class="title">${materia.nombre} - ${materia.codigo}
+                        ${materia.electiva ? "- Electiva": ""}</h1>
                 </div>
             
                 <div class="content">
                     <p>
-                        Prerrequisito: ${materia.codPerrequisito}
+                        Creditos: ${materia.creditos} Horas: ${materia.horas}
+                        ${[null,undefined,""].includes(materia.codPerrequisito) ? "": "Prerrequisito:"+materia.codPerrequisito}
+                        ${[null,undefined,""].includes(materia.crePerrequisito) ? "": " Cre:"+materia.crePerrequisito}
                     </p>
-            
-                    <a class="btn-link">Microcurriculo</a>
+                    ${[null,undefined,""].includes(materia.microcurriculo) ? '<a class="btn-link">Microcurriculo</a>': '<a href="'+materia.microcurriculo+'" class="btn-link" target="_blank">Microcurriculo</a>'}
+                    
                 </div>
             </div>`;
                     });
@@ -115,7 +118,7 @@
         async function loadButtons() {
             var container = document.getElementById("buttons");
             try {
-                let res = await fetch(`http://192.168.1.13:8080/api/pensum`),
+                let res = await fetch(`http://localhost:8080/api/pensum`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,

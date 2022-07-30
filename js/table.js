@@ -18,7 +18,12 @@ window.onload = () => {
             { data: "nombre" },
             { data: "horas" },
             { data: "creditos" },
-            { data: "microcurriculo" },
+            {
+                "data": "microcurriculo",
+                "render": function (data, type, row, meta) {
+                    return data === null || data === "" ? data : '<a href="' + data + '" target="_blank">ver microcurriculo</a>';
+                }
+            },
             {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
@@ -36,11 +41,14 @@ window.onload = () => {
     if (idParam == "pensum") {
         columns = [
             { data: "codigo" },
-            { data: "url","fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                if (oData.url != null) {
-                    $(nTd).html("<a href="+oData.url+" target='_blank'>"+oData.url+"</a>");
+            { data: "pensumTerminado" },
+            { data: "mallaTerminada" },
+            {
+                "data": "url",
+                "render": function (data, type, row, meta) {
+                    return data === null || data === "" ? data : '<a href="' + data + '" target="_blank">' + data + '</a>';
                 }
-            } },
+            },
             {
                 defaultContent: `<button class='edit'>Editar</button> <button class='delete'>Eliminar</button>`,
             }
@@ -48,6 +56,8 @@ window.onload = () => {
         path = `pensum.html?id=`;
         thead.innerHTML = `<tr>
             <th>Codigo</th>
+            <th>Pensum terminado</th>
+            <th>Malla terminada</th>
             <th>URL</th>
             <th>Acciones</th>
           </tr>`;
@@ -75,8 +85,9 @@ window.onload = () => {
     }
     if (idParam == "malla/materia") {
         columns = [
-            { data: "idMateria" },
+            { data: "idMateriaPensum" },
             { data: "codPensum" },
+            { data: "nombre" },
             { data: "codigo" },
             { data: "semestre" },
             { data: "electiva" },
@@ -90,6 +101,7 @@ window.onload = () => {
         thead.innerHTML = `<tr>
             <th>Id Materia</th>
             <th>Codigo Pensum</th>
+            <th>Nombre</th>
             <th>Codigo</th>
             <th>Semestre</th>
             <th>Electiva</th>
@@ -111,6 +123,7 @@ window.onload = () => {
             columns: columns,
             responsive: true
         })
+        .columns.adjust()
         .responsive.recalc();
     $("#listAll").on("click", ".delete", function (e) {
         e.preventDefault();

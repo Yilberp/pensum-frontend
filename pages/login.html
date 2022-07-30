@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
+                        alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <nav class="nav">
+        <ul class="menu">
+            <li class="logo"><a class="a" href="index.html">Plan de Estudios</a></li>
+            <li class="item"><a class="a" href="index.html">Home</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2 class="title">Iniciar Sesion</h2>
+        <form id="login" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="user">Usuario</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="user" name="user" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="Contraseña">Contraseña</label>
+                </div>
+                <div class="col-75">
+                    <input type="password" id="Contraseña" name="password" required>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" id="button" value="Ingresar">
+            </div>
+        </form>
+        <div id="toasts"></div>
+    </div>
+</body>
+
+</html>

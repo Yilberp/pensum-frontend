@@ -47,6 +47,9 @@ const onsubmitPensum = () => {
     $form.addEventListener('submit', async e => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target));
+        data.pensumTerminado = data.pensumTerminado === "1"
+        data.mallaTerminada = data.mallaTerminada === "1"
+        console.log(JSON.stringify(data))
         try {
             let options = {
                 method: "POST",
