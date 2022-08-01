@@ -26,13 +26,13 @@
     </nav>
     <div class="container">
         <h2 class="title">Registrarse</h2>
-        <form id="login" method="post">
+        <form id="register" method="post">
             <div class="row">
                 <div class="col-25">
                     <label for="user">Usuario</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="user" name="user" required>
+                    <input type="text" id="user" name="username" required>
                 </div>
             </div>
             <div class="row">
@@ -49,6 +49,41 @@
         </form>
         <div id="toasts"></div>
     </div>
+    <script src="../js/toats.js"></script>
+    <script>
+        window.onload = () => {
+            onsubmit();
+        }
+        function onsubmit() {
+            const $form = document.getElementById("register");
+            $form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const data = Object.fromEntries(new FormData(e.target));
+                try {
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json;charset=utf-8"
+                        },
+                        body: JSON.stringify(data)
+                    }
+
+                    let res = await fetch(url, options),
+                        json = await res.json();
+                    console.log(json)
+                    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+                    else {
+                        createToast("Guardado Exitosamente", "success");
+                        window.location.replace("login.html");
+                    }
+
+                } catch (error) {
+                    let message = error.statusText || "Error inesperado";
+                    createToast(`${error.status}: ${message}`, "error");
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

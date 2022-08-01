@@ -62,7 +62,7 @@
             var container = document.getElementById("pensums");
             var btnMallas = document.getElementById("btn-mallas");
             try {
-                let res = await fetch(`http://localhost:8080/api/pensum`),
+                let res = await fetch(`http://localhost:8080/api/pensum/terminados`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,

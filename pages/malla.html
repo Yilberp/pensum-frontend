@@ -27,7 +27,7 @@
         <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
         <a href="list.html">Listar Materias</a>
         <a href="malla.html">Ver Malla</a>
-        <a href="logout">Cerrar Sesion</a>
+        <a href="" onclick="logout()">Cerrar Sesion</a>
     </div>
     <div class="nav-menu">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
@@ -49,6 +49,9 @@
     <div id="toasts"></div>
     <script>
         window.onload =  () => {
+            if (!window.localStorage.getItem('user')) {
+                window.location.replace("login.html")
+            }
             loadButtons();
             const params = window.location.search;
             if (params != '') {
@@ -118,7 +121,7 @@
         async function loadButtons() {
             var container = document.getElementById("buttons");
             try {
-                let res = await fetch(`http://localhost:8080/api/pensum`),
+                let res = await fetch(`http://localhost:8080/api/pensum/terminados`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
@@ -141,6 +144,10 @@
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+        }
+        function logout() {
+            window.localStorage.removeItem('user');
+            window.location.replace("login.html");
         }
     </script>
 

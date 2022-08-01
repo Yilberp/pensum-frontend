@@ -115,6 +115,9 @@ window.onload = () => {
         .DataTable({
             ajax: {
                 url: url,
+                headers: {
+                    Authorization: "Bearer "+ window.localStorage.getItem("user")
+                },
                 dataSrc: "",
             },
             rowReorder: {
@@ -139,6 +142,9 @@ window.onload = () => {
         if (respuesta) {
             $.ajax({
                 url: url + `/${id}`,
+                headers: {
+                    Authorization: "Bearer "+ window.localStorage.getItem("user")
+                },
                 type: "DELETE",
                 datatype: "json",
                 data: { id },

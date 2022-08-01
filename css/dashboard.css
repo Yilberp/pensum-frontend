@@ -58,9 +58,9 @@ body {
 
 .options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, 200px);
   grid-column-gap: 10px;
-  grid-row-gap: 0px;
+  grid-row-gap: 10px;
 }
 
 /* Style inputs, select elements and textareas */
@@ -96,6 +96,7 @@ input[type=submit],
   float: right;
   margin-top: 10px;
   text-decoration: none;
+  justify-self: center;
 }
 
 /* Style the container */

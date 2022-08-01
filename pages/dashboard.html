@@ -27,7 +27,7 @@
         <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
         <a href="list.html">Listar Materias</a>
         <a href="malla.html">Ver Malla</a>
-        <a href="logout">Cerrar Sesion</a>
+        <a href="" onclick="logout()">Cerrar Sesion</a>
     </div>
     <div class="nav-menu">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
@@ -78,6 +78,9 @@
     <script src="../js/fetch.js"></script>
     <script>
         window.onload = async () => {
+            if (!window.localStorage.getItem('user')) {
+                window.location.replace("login.html")
+            }
             onsubmit();
             const params = window.location.search;
             if (params != '') {
@@ -91,7 +94,13 @@
                 const horasIpt = document.getElementById("horas");
                 const microIpt = document.getElementById("link");
                 try {
-                    let res = await fetch(`http://localhost:8080/api/materia/${idParam}`),
+                    let options = {
+                        headers: {
+                            "Authorization": "Bearer " + window.localStorage.getItem('user'),
+                            "Content-type": "application/json;charset=utf-8"
+                        }
+                    }
+                    let res = await fetch(`http://localhost:8080/api/materia/${idParam}`,options),
                         json = await res.json();
                     if (!res.ok) throw {
                         status: res.status,
@@ -114,6 +123,10 @@
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+        }
+        function logout() {
+            window.localStorage.removeItem('user');
+            window.location.replace("login.html");
         }
     </script>
 

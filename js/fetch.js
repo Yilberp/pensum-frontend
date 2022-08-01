@@ -21,6 +21,7 @@ const onsubmit = () => {
             let options = {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer "+ window.localStorage.getItem('user'),
                     "Content-type": "application/json;charset=utf-8"
                 },
                 body: JSON.stringify(data)
@@ -54,6 +55,7 @@ const onsubmitPensum = () => {
             let options = {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer " + window.localStorage.getItem('user'),
                     "Content-type": "application/json;charset=utf-8"
                 },
                 body: JSON.stringify(data)

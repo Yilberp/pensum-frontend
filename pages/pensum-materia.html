@@ -29,7 +29,7 @@
     <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
     <a href="list.html">Listar Materias</a>
     <a href="malla.html">Ver Malla</a>
-    <a href="logout">Cerrar Sesion</a>
+    <a href="" onclick="logout()">Cerrar Sesion</a>
   </div>
   <div class="nav-menu">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
@@ -54,11 +54,12 @@
           <label for="codPensum">Codigo Pensum</label>
         </div>
         <div class="col-75">
-          <datalist id="pensums">
+          <!-- <datalist id="pensums">
 
-          </datalist>
-          <input type="text" list="pensums" id="codPensum" name="codPensum" placeholder="Codigo del pensum"
-            onchange="onchangePrerrequisitos()">
+          </datalist> -->
+          <select id="pensums" name="codPensum" onchange="onchangePrerrequisitos()"></select>
+          <!-- <input type="text" list="pensums" id="codPensum" name="codPensum" placeholder="Codigo del pensum"
+            onchange="onchangePrerrequisitos()"> -->
         </div>
       </div>
       <div class="row">
@@ -130,6 +131,9 @@
   <script src="../js/toats.js"></script>
   <script>
     window.onload = async () => {
+      if (!window.localStorage.getItem('user')) {
+        window.location.replace("login.html")
+      }
       getMaterias();
       getPensum();
       onsubmit();
@@ -147,7 +151,13 @@
         const preIpt = document.getElementById("select-prerequisitos");
         const creIpt = document.getElementById("crePerrequisito");
         try {
-          let res = await fetch(`http://localhost:8080/api/malla/materia/${idParam}`),
+          let options = {
+            headers: {
+              "Authorization": "Bearer " + window.localStorage.getItem('user'),
+              "Content-type": "application/json;charset=utf-8"
+            }
+          }
+          let res = await fetch(`http://localhost:8080/api/malla/materia/${idParam}`,options),
             json = await res.json();
           if (!res.ok) throw {
             status: res.status,
@@ -166,8 +176,8 @@
               no_results_text: "Oops, nothing found!"
             })
             $("#select-prerequisitos").trigger("chosen:updated");
-          }else{ getPrerequisitos(json.pensumEntity.codigo, json.semestre)}
-          
+          } else { getPrerequisitos(json.pensumEntity.codigo, json.semestre) }
+
         } catch (error) {
           let message = error.statusText || "Error inesperado";
           console.log(`${error.status}: ${message}`);
@@ -177,7 +187,13 @@
     async function getMaterias() {
       const datalist = document.getElementById("materias");
       try {
-        let res = await fetch(`http://localhost:8080/api/materia`),
+        let options = {
+            headers: {
+              "Authorization": "Bearer " + window.localStorage.getItem('user'),
+              "Content-type": "application/json;charset=utf-8"
+            }
+          }
+        let res = await fetch(`http://localhost:8080/api/materia`,options),
           json = await res.json();
         if (!res.ok) throw {
           status: res.status,
@@ -204,7 +220,13 @@
     async function getPrerequisitos(codPensum, semestre) {
       const select = document.getElementById("select-prerequisitos");
       try {
-        let res = await fetch(`http://localhost:8080/api/malla/prerrequisitos/${codPensum}/${semestre}`),
+        let options = {
+            headers: {
+              "Authorization": "Bearer " + window.localStorage.getItem('user'),
+              "Content-type": "application/json;charset=utf-8"
+            }
+          }
+        let res = await fetch(`http://localhost:8080/api/malla/prerrequisitos/${codPensum}/${semestre}`,options),
           json = await res.json();
         if (!res.ok) throw {
           status: res.status,
@@ -228,7 +250,13 @@
     async function getPensum() {
       const datalist = document.getElementById("pensums");
       try {
-        let res = await fetch(`http://localhost:8080/api/pensum`),
+        let options = {
+            headers: {
+              "Authorization": "Bearer " + window.localStorage.getItem('user'),
+              "Content-type": "application/json;charset=utf-8"
+            }
+          }
+        let res = await fetch(`http://localhost:8080/api/pensum`,options),
           json = await res.json();
         if (!res.ok) throw {
           status: res.status,
@@ -237,6 +265,7 @@
         json.map((data) => {
           const opt = document.createElement('option');
           opt.value = data.codigo;
+          opt.textContent = data.codigo;
           datalist.appendChild(opt);
         })
       } catch (error) {
@@ -269,6 +298,7 @@
           let options = {
             method: "POST",
             headers: {
+              "Authorization": "Bearer " + window.localStorage.getItem('user'),
               "Content-type": "application/json;charset=utf-8"
             },
             body: JSON.stringify(data)
@@ -296,6 +326,10 @@
 
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
+    }
+    function logout() {
+      window.localStorage.removeItem('user');
+      window.location.replace("login.html");
     }
   </script>
 
