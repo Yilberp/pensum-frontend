@@ -2,140 +2,144 @@
 <html lang="es">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/dashboard.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-  <header>
-    <nav class="headerBg">
-      <div class="headerIn">
-        <a href="https://ww2.ufps.edu.co/">
-          <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
-        </a>
-      </div>
-    </nav>
-  </header>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="dashboard.html">Crear Materia</a>
-    <a href="pensum.html">Crear Pensum</a>
-    <a href="pensum-materia.html">Crear Pensum-Materia</a>
-    <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
-    <a href="list.html">Listar Materias</a>
-    <a href="malla.html">Ver Malla</a>
-    <a href="" onclick="logout()">Cerrar Sesion</a>
-  </div>
-  <div class="nav-menu">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-  </div>
-  <div class="container">
-    <h2 class="title">Crear Pensum</h2>
-    <form id="crear-pensum" method="post">
-      <div class="row">
-        <div class="col-25">
-          <label for="codigo">Codigo</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="codigo" name="codigo" placeholder="Codigo">
-          <input type="hidden" id="idPensum">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="link">URL Pensum</label>
-        </div>
-        <div class="col-75">
-          <input type="url" id="link" name="url">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="pensumB">¿Pensum Terminado?</label>
-          <div class="tooltip">&#9432;
-            <span class="tooltiptext">Sí el pensum está terminado se mostrará al público, de lo contrario, sólo el
+    <header>
+        <nav class="headerBg">
+            <div class="headerIn">
+                <a href="https://ww2.ufps.edu.co/">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Crear Materia</a>
+        <a href="pensum.html">Crear Pensum</a>
+        <a href="pensum-materia.html">Crear Pensum-Materia</a>
+        <a href="pensum-electiva.html">Crear Pensum-Electiva</a>
+        <a href="list.html">Listar Materias</a>
+        <a href="malla.html">Ver Malla</a>
+        <a href="" onclick="logout()">Cerrar Sesion</a>
+    </div>
+    <div class="nav-menu">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    </div>
+    <div class="container">
+        <h2 class="title">Crear Pensum</h2>
+        <form id="crear-pensum" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="codigo">Codigo</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="codigo" name="codigo" placeholder="Codigo">
+                    <input type="hidden" id="idPensum">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="link">URL Pensum</label>
+                </div>
+                <div class="col-75">
+                    <input type="url" id="link" name="url">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="pensumB">¿Pensum Terminado?</label>
+                    <div class="tooltip">&#9432;
+                        <span class="tooltiptext">Sí el pensum está terminado se mostrará al público, de lo contrario, sólo el
               administrador podrá verlo</span>
-          </div>
-        </div>
-        <div class="col-75">
-          <input type="radio" id="pensumBSi" name="pensumTerminado" value=1>
-          <label for="pensumBSi">Si</label>
-          <input type="radio" id="pensumBNo" name="pensumTerminado" value=0>
-          <label for="pensumBNo">No</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="mallaB">¿Malla Terminada?</label>
-          <div class="tooltip">&#9432;
-            <span class="tooltiptext">Sí la malla está terminada se mostrará al público, de lo contrario, no se
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="radio" id="pensumBSi" name="pensumTerminado" value=1>
+                    <label for="pensumBSi">Si</label>
+                    <input type="radio" id="pensumBNo" name="pensumTerminado" value=0>
+                    <label for="pensumBNo">No</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="mallaB">¿Malla Terminada?</label>
+                    <div class="tooltip">&#9432;
+                        <span class="tooltiptext">Sí la malla está terminada se mostrará al público, de lo contrario, no se
               mostrará</span>
-          </div>
-        </div>
-        <div class="col-75">
-          <input type="radio" id="mallaBSi" name="mallaTerminada" value=1>
-          <label for="mallaBSi">Si</label>
-          <input type="radio" id="mallaBNo" name="mallaTerminada" value=0>
-          <label for="mallaBNo">No</label>
-        </div>
-      </div>
-      <div class="row">
-        <input type="submit" id="button" value="Guardar">
-      </div>
-    </form>
-    <div id="toasts"></div>
-  </div>
-  <script src="../js/toats.js"></script>
-  <script src="../js/fetch.js"></script>
-  <script>
-    window.onload = async () => {
-      if (!window.localStorage.getItem('user')) {
-        window.location.replace("login.html")
-      }
-      onsubmitPensum();
-      const params = window.location.search;
-      if (params != '') {
-        const urlParams = new URLSearchParams(params);
-        const h2 = document.querySelector(".title");
-        h2.textContent = "Actualizar Pensum";
-        const idParam = urlParams.get('id');
-        const idIpt = document.getElementById("idPensum").value = idParam;
-        const codigoIpt = document.getElementById("codigo");
-        const urlIpt = document.getElementById("link");
-        try {
-          let options = {
-            headers: {
-              "Authorization": "Bearer " + window.localStorage.getItem('user'),
-              "Content-type": "application/json;charset=utf-8"
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="radio" id="mallaBSi" name="mallaTerminada" value=1>
+                    <label for="mallaBSi">Si</label>
+                    <input type="radio" id="mallaBNo" name="mallaTerminada" value=0>
+                    <label for="mallaBNo">No</label>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" id="button" value="Guardar">
+            </div>
+        </form>
+        <div id="toasts"></div>
+    </div>
+    <script src="../js/toats.js"></script>
+    <script src="../js/fetch.js"></script>
+    <script>
+        window.onload = async() => {
+            if (!window.localStorage.getItem('user')) {
+                window.location.replace("login.html")
             }
-          }
-          let res = await fetch(`http://localhost:8080/api/pensum/${idParam}`,options),
-            json = await res.json();
-          if (!res.ok) throw { status: res.status, statusText: res.statusText };
-          codigoIpt.value = json.codigo;
-          urlIpt.value = json.url;
-          json.pensumTerminado ? document.getElementById('pensumBSi').checked = true : document.getElementById('pensumBNo').checked = true;
-          json.mallaTerminada ? document.getElementById('mallaBSi').checked = true : document.getElementById('mallaBNo').checked = true;
-        } catch (error) {
-          let message = error.statusText || "Error inesperado";
-          createToast(`${error.status}: ${message}`, "error");
-        }
-      }
-    };
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
+            onsubmitPensum();
+            const params = window.location.search;
+            if (params != '') {
+                const urlParams = new URLSearchParams(params);
+                const h2 = document.querySelector(".title");
+                h2.textContent = "Actualizar Pensum";
+                const idParam = urlParams.get('id');
+                const idIpt = document.getElementById("idPensum").value = idParam;
+                const codigoIpt = document.getElementById("codigo");
+                const urlIpt = document.getElementById("link");
+                try {
+                    let options = {
+                        headers: {
+                            "Authorization": "Bearer " + window.localStorage.getItem('user'),
+                            "Content-type": "application/json;charset=utf-8"
+                        }
+                    }
+                    let res = await fetch(`https://pensum-app.herokuapp.com/api/pensum/${idParam}`, options),
+                        json = await res.json();
+                    if (!res.ok) throw {
+                        status: res.status,
+                        statusText: res.statusText
+                    };
+                    codigoIpt.value = json.codigo;
+                    urlIpt.value = json.url;
+                    json.pensumTerminado ? document.getElementById('pensumBSi').checked = true : document.getElementById('pensumBNo').checked = true;
+                    json.mallaTerminada ? document.getElementById('mallaBSi').checked = true : document.getElementById('mallaBNo').checked = true;
+                } catch (error) {
+                    let message = error.statusText || "Error inesperado";
+                    createToast(`${error.status}: ${message}`, "error");
+                }
+            }
+        };
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-    function logout() {
-      window.localStorage.removeItem('user');
-      window.location.replace("login.html");
-    }
-  </script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function logout() {
+            window.localStorage.removeItem('user');
+            window.location.replace("login.html");
+        }
+    </script>
 
 </body>
 

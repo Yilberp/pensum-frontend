@@ -3,8 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
@@ -14,8 +13,7 @@
         <nav class="headerBg">
             <div class="headerIn">
                 <a href="https://ww2.ufps.edu.co/">
-                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
-                        alt="Logo UFPS">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
                 </a>
             </div>
         </nav>
@@ -33,7 +31,7 @@
             <h1 style="font-size:36px;">Pensums</h1>
         </div>
         <div id="pensums">
-            
+
         </div>
         <div style="margin-bottom:20px; border-bottom: 3px solid #aa1916; padding: 0 10px;">
             <h1 id="title-malla" style="font-size:36px;">Malla</h1>
@@ -42,12 +40,12 @@
 
         </div>
         <div id="container-malla" class="container-table">
-            
+
         </div>
     </section>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.js"></script>
     <script>
-        window.onload =  () => {
+        window.onload = () => {
             loadPensums();
             const params = window.location.search;
             if (params != '') {
@@ -62,7 +60,7 @@
             var container = document.getElementById("pensums");
             var btnMallas = document.getElementById("btn-mallas");
             try {
-                let res = await fetch(`http://localhost:8080/api/pensum/terminados`),
+                let res = await fetch(`https://pensum-app.herokuapp.com/api/pensum/terminados`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
@@ -70,7 +68,7 @@
                 };
                 let str = "";
                 let strBtn = "";
-                json.map(function (pensum) {
+                json.map(function(pensum) {
                     str += `<p><a class="pensum-list" href='${pensum.url}' target="_blank">Pensum ${pensum.codigo}</a></p>`;
                     strBtn += `<a id='${pensum.codigo}' class='btn-list' href='index.html?id=${pensum.codigo}'>Malla ${pensum.codigo}</a>`;
                 })
@@ -96,7 +94,7 @@
                 10: "DECIMO SEMESTRE",
             }
             try {
-                let res = await fetch(`http://localhost:8080/api/malla/${idParam}`),
+                let res = await fetch(`https://pensum-app.herokuapp.com/api/malla/${idParam}`),
                     json = await res.json();
                 if (!res.ok) throw {
                     status: res.status,
@@ -127,9 +125,9 @@
                 </div>
             </div>`;
                     });
-                str += materias;
-                materias = "";
-                str += `</div>`;
+                    str += materias;
+                    materias = "";
+                    str += `</div>`;
                 })
                 container.innerHTML = str;
             } catch (error) {
@@ -137,8 +135,8 @@
                 console.log(`${error.status}: ${message}`);
             }
         }
-        $(function () {
-            $(".toggle").on("click", function () {
+        $(function() {
+            $(".toggle").on("click", function() {
                 if ($(".item").hasClass("active")) {
                     $(".item").removeClass("active");
                     $(this).find("a").html("<i class='fas fa-bars'></i>");

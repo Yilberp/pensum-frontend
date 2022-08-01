@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/api/materia';
+const url = 'https://pensum-app.herokuapp.com/api/materia';
 // window.onload = function() {
 //     fetch(url).then((response) =>
 //         response.json()).then(function(data) {
@@ -21,12 +21,12 @@ const onsubmit = () => {
             let options = {
                 method: "POST",
                 headers: {
-                    "Authorization": "Bearer "+ window.localStorage.getItem('user'),
+                    "Authorization": "Bearer " + window.localStorage.getItem('user'),
                     "Content-type": "application/json;charset=utf-8"
                 },
                 body: JSON.stringify(data)
             }
-            
+
             let res = await fetch(url, options),
                 json = await res.json();
             console.log(json)
@@ -60,8 +60,8 @@ const onsubmitPensum = () => {
                 },
                 body: JSON.stringify(data)
             }
-            
-            let res = await fetch("http://localhost:8080/api/pensum", options),
+
+            let res = await fetch("https://pensum-app.herokuapp.com/api/pensum", options),
                 json = await res.json();
             console.log(json)
             if (!res.ok) throw { status: res.status, statusText: res.statusText };
@@ -73,4 +73,3 @@ const onsubmitPensum = () => {
         }
     });
 }
-

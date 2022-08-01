@@ -12,8 +12,7 @@
         <nav class="headerBg">
             <div class="headerIn">
                 <a href="https://ww2.ufps.edu.co/">
-                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
-                        alt="Logo UFPS">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
                 </a>
             </div>
         </nav>
@@ -54,6 +53,7 @@
         window.onload = () => {
             onsubmit();
         }
+
         function onsubmit() {
             const $form = document.getElementById("login");
             $form.addEventListener('submit', async e => {
@@ -65,10 +65,13 @@
                         body: data
                     }
 
-                    let res = await fetch("http://localhost:8080/api/login", options),
+                    let res = await fetch("https://pensum-app.herokuapp.com/api/login", options),
                         json = await res.json();
                     console.log(json)
-                    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+                    if (!res.ok) throw {
+                        status: res.status,
+                        statusText: res.statusText
+                    };
                     else {
                         createToast("Validacion Correcta", "success");
                         window.localStorage.setItem('user', json.access_token);

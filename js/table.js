@@ -20,7 +20,7 @@ window.onload = () => {
             { data: "creditos" },
             {
                 "data": "microcurriculo",
-                "render": function (data, type, row, meta) {
+                "render": function(data, type, row, meta) {
                     return data === null || data === "" ? data : '<a href="' + data + '" target="_blank">ver microcurriculo</a>';
                 }
             },
@@ -45,7 +45,7 @@ window.onload = () => {
             { data: "mallaTerminada" },
             {
                 "data": "url",
-                "render": function (data, type, row, meta) {
+                "render": function(data, type, row, meta) {
                     return data === null || data === "" ? data : '<a href="' + data + '" target="_blank">' + data + '</a>';
                 }
             },
@@ -110,13 +110,13 @@ window.onload = () => {
             <th>Acciones</th>
           </tr>`;
     }
-    const url = `http://localhost:8080/api/${idParam}`;
+    const url = `https://pensum-app.herokuapp.com/api/${idParam}`;
     tablaMaterias = $("#listAll")
         .DataTable({
             ajax: {
                 url: url,
                 headers: {
-                    Authorization: "Bearer "+ window.localStorage.getItem("user")
+                    Authorization: "Bearer " + window.localStorage.getItem("user")
                 },
                 dataSrc: "",
             },
@@ -128,7 +128,7 @@ window.onload = () => {
         })
         .columns.adjust()
         .responsive.recalc();
-    $("#listAll").on("click", ".delete", function (e) {
+    $("#listAll").on("click", ".delete", function(e) {
         e.preventDefault();
         fila = $(this);
         if ($(this).parents("tr").hasClass('child')) { //vemos si el actual row es child row
@@ -143,19 +143,19 @@ window.onload = () => {
             $.ajax({
                 url: url + `/${id}`,
                 headers: {
-                    Authorization: "Bearer "+ window.localStorage.getItem("user")
+                    Authorization: "Bearer " + window.localStorage.getItem("user")
                 },
                 type: "DELETE",
                 datatype: "json",
                 data: { id },
-                success: function () {
+                success: function() {
                     tablaMaterias.row(fila.parents("tr")).remove().draw();
                     createToast("Eliminado Exitosamente", "success");
                 },
             });
         }
     });
-    $("#listAll").on("click", ".edit", function (e) {
+    $("#listAll").on("click", ".edit", function(e) {
         e.preventDefault();
         fila = $(this);
         if ($(this).parents("tr").hasClass('child')) { //vemos si el actual row es child row

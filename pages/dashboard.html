@@ -3,8 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
@@ -13,8 +12,7 @@
         <nav class="headerBg">
             <div class="headerIn">
                 <a href="https://ww2.ufps.edu.co/">
-                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png"
-                        alt="Logo UFPS">
+                    <img class="logo" src="https://ww2.ufps.edu.co/public/imagenes/template/header/logo_ufps.png" alt="Logo UFPS">
                 </a>
             </div>
         </nav>
@@ -77,7 +75,7 @@
     <script src="../js/toats.js"></script>
     <script src="../js/fetch.js"></script>
     <script>
-        window.onload = async () => {
+        window.onload = async() => {
             if (!window.localStorage.getItem('user')) {
                 window.location.replace("login.html")
             }
@@ -100,7 +98,7 @@
                             "Content-type": "application/json;charset=utf-8"
                         }
                     }
-                    let res = await fetch(`http://localhost:8080/api/materia/${idParam}`,options),
+                    let res = await fetch(`https://pensum-app.herokuapp.com/api/materia/${idParam}`, options),
                         json = await res.json();
                     if (!res.ok) throw {
                         status: res.status,
@@ -124,6 +122,7 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+
         function logout() {
             window.localStorage.removeItem('user');
             window.location.replace("login.html");

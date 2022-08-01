@@ -20,7 +20,7 @@
     async function getMalla() {
         const datalist = document.getElementById("malla");
         try {
-            let res = await fetch(`http://localhost:8080/api/malla/115`),
+            let res = await fetch(`https://pensum-app.herokuapp.com/api/malla/115`),
                 json = await res.json();
             if (!res.ok) throw {
                 status: res.status,
